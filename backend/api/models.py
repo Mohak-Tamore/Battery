@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User 
 
 class Station(models.Model):
     sid = models.CharField(primary_key=True, max_length=100)
@@ -11,6 +10,14 @@ class Station(models.Model):
     ready = models.IntegerField()
 
 
+class User(models.Model):
+    user_id = models.CharField(max_length=50)
+    user_name = models.TextField()
+    city = models.TextField()
+    contact = models.IntegerField()
+    country = models.TextField(max_length=50)
+    email = models.EmailField()
+
 class Battery(models.Model):
     bid = models.CharField(primary_key=True, max_length=100)
     sid = models.ForeignKey(Station, on_delete=models.CASCADE)
@@ -19,11 +26,3 @@ class Battery(models.Model):
     cycles = models.IntegerField()
     kWh = models.FloatField()
        
-
-class User(models.Model):
-    user_id = models.CharField(max_length=50)
-    user_name = models.TextField()
-    city = models.TextField()
-    contact = models.IntegerField()
-    country = models.CharField(max_length=50)
-    email = models.EmailField()
