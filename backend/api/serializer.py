@@ -1,6 +1,8 @@
 from.models import *
 from rest_framework import serializers
 
+# code here 
+
 class StationSerializer(serializers.Serializer):
     
     sid = serializers.CharField(primary_key=True, max_length=100)
