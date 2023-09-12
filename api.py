@@ -1,3 +1,4 @@
+# here is the code for CRUD
 
 @csrf_exempt
 def employeeview(request):
