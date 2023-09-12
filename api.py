@@ -1,4 +1,4 @@
-
+# Here is the code for api CRUD operations 
 @csrf_exempt
 def employeeview(request):
     if request.method == 'GET':
