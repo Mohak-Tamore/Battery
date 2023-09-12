@@ -12,3 +12,13 @@ def decrease_battery():
 
 decrement_thread = threading.Thread(target=decrease_battery)
 decrement_thread.start()
+
+
+
+# api from here
+
+
+
+
+
+

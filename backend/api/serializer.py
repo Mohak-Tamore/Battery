@@ -1,7 +1,6 @@
 from.models import *
 from rest_framework import serializers
 
-# code here 
 
 class StationSerializer(serializers.Serializer):
     
