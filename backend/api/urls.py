@@ -3,6 +3,7 @@ from api import views
 
 
 urlpatterns = [
-    path('',views.home, name="home" )
+    path('',views.home, name="home" ),
+    path('api/station',views.station, name="station" ),
 
 ]

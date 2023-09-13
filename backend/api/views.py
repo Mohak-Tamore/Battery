@@ -1,5 +1,11 @@
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from django.shortcuts import render, HttpResponse
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+from .models import Employee
+from .serializer import StationSerializer
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+from rest_framework import status
 import time
 import threading
 
@@ -17,25 +23,25 @@ decrement_thread.start()
 
 # api from here
 
-# @csrf_exempt
-# def employeeview(request):
-#     if request.method == 'GET':
-#         emp = Employee.objects.all()
-#         so = EmployeeSerializer(emp, many=True)
-#         return JsonResponse(so.data, safe=False)
+@csrf_exempt
+def Station(request):
+    if request.method == 'GET':
+        emp = Station.objects.all()
+        so = StationSerializer(emp, many=True)
+        return JsonResponse(so.data, safe=False)
     
-#     elif request.method == 'POST':
-#         jsonData = JSONParser().parse(request)
-#         serializer = EmployeeSerializer(data= jsonData)
-#         if serializer.is_valid():
-#             employee_instance = serializer.save()  # Save the instance and get the saved object
-#             return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        jsonData = JSONParser().parse(request)
+        serializer = StationSerializer(data= jsonData)
+        if serializer.is_valid():
+            employee_instance = serializer.save()  # Save the instance and get the saved object
+            return JsonResponse(serializer.data, safe=False)
         
-#         else:
-#             return JsonResponse(serializer.errors , safe=False)
+        else:
+            return JsonResponse(serializer.errors , safe=False)
         
-#         # return JsonResponse({"message":"done"}, safe=False)
-#     # return JsonResponse({'soham':'nancy'})
+        # return JsonResponse({"message":"done"}, safe=False)
+    # return JsonResponse({'soham':'nancy'})
 
 # def userview(request):
 #     emp = User.objects.all()
