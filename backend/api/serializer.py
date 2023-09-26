@@ -1,27 +1,23 @@
-from.models import Employee
+from.models import *
 from rest_framework import serializers
 
-class EmployeeSerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=30)
-    email = serializers.EmailField()
-    password = serializers.CharField(max_length=30)
-    phone = serializers.CharField(max_length=10)
+class StationSerializer(serializers.Serializer):
+    stationid = serializers.CharField(max_length=100)
+    stationname = serializers.CharField(max_length=100)
+    address = serializers.CharField(max_length=100)
+    battery_available = serializers.IntegerField()
+    avail_slots = serializers.IntegerField()
+    battery_half = serializers.IntegerField()
+    battery_ready = serializers.IntegerField()
 
     
     def create(self, validated_data):
-        return Employee.objects.create(**validated_data)
+        return Station.objects.create(**validated_data)
 
-    def update(self, employee, validated_data):
-        newEmployee = Employee(**validated_data)
-        newEmployee.id = employee.id
-        newEmployee.save()
-        return newEmployee
-
-
-class UserSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    password = serializers.CharField()
-    # email = serializers.EmailField()
-    # password = serializers.CharField(max_length=30)
-    # phone = serializers.CharField(max_length=10)    
+    # def update(self, station, validated_data):
+    #     newStation = Station(**validated_data)
+    #     newStation.stationid = station.stationid
+    #     newStation.save()
+    #     return newStation
+    
 
