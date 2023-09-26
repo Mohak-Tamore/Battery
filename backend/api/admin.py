@@ -5,3 +5,4 @@ from api.models import *
 
 admin.site.register(Station)
 admin.site.register(Battery)
+admin.site.register(Users)
