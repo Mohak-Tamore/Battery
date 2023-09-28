@@ -141,3 +141,55 @@ def usersdetailview(request, pk):
             return JsonResponse(serializer.errors , safe=False)
         
 
+
+# 3.Battery
+
+@csrf_exempt
+def batteryview(request):
+    if request.method == 'GET':
+        emp = Users.objects.all()
+        so = UsersSerializer(emp, many=True)
+        return JsonResponse(so.data, safe=False)
+    
+    elif request.method == 'POST':
+        jsonData = JSONParser().parse(request)
+        serializer = UsersSerializer(data= jsonData)
+        if serializer.is_valid():
+            users_instance = serializer.save()  # Save the instance and get the saved object
+            return JsonResponse(serializer.data, safe=False)
+        
+        else:
+            return JsonResponse(serializer.errors , safe=False)
+        
+
+@csrf_exempt
+def batterydetailview(request, pk):
+
+    try:
+        users = Users.objects.get(usersid=pk)
+    
+    except Users.DoesNotExist:
+        return HttpResponse(status=404)
+
+
+    if request.method == 'DELETE':
+        users.delete()
+        return HttpResponse(status= 202)
+
+
+    elif request.method == 'GET':
+        serializer = UsersSerializer(users)
+        return JsonResponse(serializer.data, safe=False)
+
+
+    elif request.method == 'PUT':
+        jsonData = JSONParser().parse(request)
+        serializer = UsersSerializer(users, data= jsonData)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data , safe=False)
+        
+        else:
+            return JsonResponse(serializer.errors , safe=False)
+        
+

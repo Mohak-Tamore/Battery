@@ -36,8 +36,29 @@ class UsersSerializer(serializers.Serializer):
 
     def update(self, users, validated_data):
         newUsers = Users(**validated_data)
-        newUsers.stationid = users.stationid
+        newUsers.usersid = users.usersid
         newUsers.save()
         return newUsers
+    
+# Battery serializers logic
+class BatterySerializer(serializers.Serializer):
+    batteryid = serializers.CharField(max_length=100)
+    stationid = serializers.CharField(max_length=100)
+    user_id = serializers.CharField(max_length=100)
+    current = serializers.IntegerField()
+    power = serializers.IntegerField()
+    status = serializers.CharField(max_length=100)
+    cycles = serializers.IntegerField()
+       
+
+    
+    def create(self, validated_data):
+        return Users.objects.create(**validated_data)
+
+    def update(self, users, validated_data):
+        newBattery = Users(**validated_data)
+        newBattery.batteryid = users.batteryid
+        newBattery.save()
+        return newBattery
     
 

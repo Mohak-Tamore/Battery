@@ -10,6 +10,9 @@ urlpatterns = [
     path('api/station/<int:pk>', stationdetailview),
     # users api url
     path('api/users',usersview),
-    path('api/users/<int:pk>', usersdetailview)
+    path('api/users/<int:pk>', usersdetailview),
+    # battery api url
+    path('api/battery',batteryview),
+    path('api/battery/<int:pk>', batterydetailview)
 
 ]
