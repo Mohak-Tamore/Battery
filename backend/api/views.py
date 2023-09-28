@@ -114,7 +114,7 @@ def usersview(request):
 def usersdetailview(request, pk):
 
     try:
-        users = Users.objects.get(usersid=pk)
+        users = Users.objects.get(user_id=pk)
     
     except Users.DoesNotExist:
         return HttpResponse(status=404)
@@ -147,15 +147,15 @@ def usersdetailview(request, pk):
 @csrf_exempt
 def batteryview(request):
     if request.method == 'GET':
-        emp = Users.objects.all()
-        so = UsersSerializer(emp, many=True)
+        emp = Battery.objects.all()
+        so = BatterySerializer(emp, many=True)
         return JsonResponse(so.data, safe=False)
     
     elif request.method == 'POST':
         jsonData = JSONParser().parse(request)
-        serializer = UsersSerializer(data= jsonData)
+        serializer = BatterySerializer(data= jsonData)
         if serializer.is_valid():
-            users_instance = serializer.save()  # Save the instance and get the saved object
+            battery_instance = serializer.save()  # Save the instance and get the saved object
             return JsonResponse(serializer.data, safe=False)
         
         else:
@@ -166,25 +166,25 @@ def batteryview(request):
 def batterydetailview(request, pk):
 
     try:
-        users = Users.objects.get(usersid=pk)
+        battery = Battery.objects.get(batteryid=pk)
     
-    except Users.DoesNotExist:
+    except Battery.DoesNotExist:
         return HttpResponse(status=404)
 
 
     if request.method == 'DELETE':
-        users.delete()
+        battery.delete()
         return HttpResponse(status= 202)
 
 
     elif request.method == 'GET':
-        serializer = UsersSerializer(users)
+        serializer = BatterySerializer(battery)
         return JsonResponse(serializer.data, safe=False)
 
 
     elif request.method == 'PUT':
         jsonData = JSONParser().parse(request)
-        serializer = UsersSerializer(users, data= jsonData)
+        serializer = BatterySerializer(battery, data= jsonData)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data , safe=False)
